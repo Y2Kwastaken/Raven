@@ -7,7 +7,7 @@ plugins {
 
 group 'sh.miles.raven'
 version '1.0.0-SNAPSHOT'
-description 'A set of helper classes for working with the Spigot API'
+description 'Database API by Miles'
 
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = "UTF-8"
@@ -18,7 +18,6 @@ allprojects {
     repositories {
         mavenCentral()
         mavenLocal()
-        maven { url = uri('https://hub.spigotmc.org/nexus/content/repositories/snapshots/') }
     }
 }
 
