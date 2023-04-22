@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id "io.freefair.lombok" version "8.0.1" apply true
+}
+
+repositories {
+    maven {
+        url = uri('https://repo.papermc.io/repository/maven-public/')
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.9.2'
+    testImplementation 'org.junit.platform:junit-platform-suite-engine:1.9.1'
+    testImplementation 'com.github.seeseemelk:MockBukkit-v1.18:2.7.0'
+
+    compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
+    implementation 'org.jetbrains:annotations:24.0.0'
+}
+
+shadowJar {
+    archiveClassifier.set("")
+}
+
+test {
+    useJUnitPlatform()
+}
