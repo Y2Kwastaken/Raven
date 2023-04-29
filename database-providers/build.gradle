@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id "io.freefair.lombok" version "8.0.1" apply true
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = "UTF-8"
+java.sourceCompatibility = JavaVersion.VERSION_17
+jar.enabled = false 
+
+allprojects {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+}
+
+dependencies {
+}
+
+

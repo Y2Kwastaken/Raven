@@ -1,2 +1,3 @@
-rootProject.name = 'pluginpal'
-include 'core'
+rootProject.name = 'raven'
+include ':core', ':api', ':database-providers'
+include ':database-providers:mongodb'
