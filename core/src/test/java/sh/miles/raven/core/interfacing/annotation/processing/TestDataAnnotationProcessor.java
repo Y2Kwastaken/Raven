@@ -23,10 +23,10 @@ public class TestDataAnnotationProcessor {
         final TestMockProcessClass object = DataAnnotationProcessor.createDataInstance(TestMockProcessClass.class,
                 section);
         assertNotNull(object, "The object should not be null.");
-        
+
         assertEquals("Hello, World!", object.getString(), "The string should be equal.");
         assertEquals(5, object.getInteger(), "The integer should be equal.");
-        
+
         final TestMockProcessClass.TestInternalMock internalObject = object.getInternal();
         assertNotNull(internalObject, "The internal object should not be null.");
     }

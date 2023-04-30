@@ -5,4 +5,12 @@ package sh.miles.raven.api.interfacing.object;
  * objects.
  */
 public interface DataObject {
+
+    /**
+     * This method is used to get the name of the section in the database that this
+     * object is stored in.
+     * 
+     * @return The name of the section in the database that this object is stored
+     */
+    String getDatabaseSectionName();
 }

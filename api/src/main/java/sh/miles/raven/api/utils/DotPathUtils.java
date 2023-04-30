@@ -90,4 +90,15 @@ public final class DotPathUtils {
         return path.substring(path.indexOf(".") + 1);
     }
 
+    /**
+     * toDotPath converts a list of strings to a dot path (e.g. ["root", "child"] to
+     * "root.child")
+     * 
+     * @param path the list of strings
+     * @return the dot path
+     */
+    public static String toDotPath(final String... path) {
+        return String.join(".", path);
+    }
+
 }

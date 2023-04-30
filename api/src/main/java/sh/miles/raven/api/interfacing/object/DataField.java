@@ -17,10 +17,12 @@ public class DataField<T> {
     /**
      * Creates a new DataField with the given key.
      * 
-     * @param key The key of the field.
+     * @param key          The key of the field.
+     * @param defaultValue The default value of the field.
      */
-    public DataField(String key) {
+    public DataField(String key, T defaultValue) {
         this.key = key;
+        this.value = defaultValue;
     }
 
     public T getValue() {
