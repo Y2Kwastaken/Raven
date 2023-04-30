@@ -18,6 +18,7 @@ public class MongoDatabaseSectionTest {
     public static final String CONNECTION_STRING = System.getenv("MONGO_ATLAS_CONNECTION");
     public static final String DATABASE_NAME = "test";
     public static final String COLLECTION_NAME = "test-collection";
+    public static final String DOCUMENT_ID = "test-document";
 
     private static final MongoDatabaseSection section = connect();
 
@@ -145,7 +146,7 @@ public class MongoDatabaseSectionTest {
         }
 
         final var database = connection.getDatabase(DATABASE_NAME);
-        return (MongoDatabaseSection) database.getSection(COLLECTION_NAME);
+        return (MongoDatabaseSection) database.getSection(COLLECTION_NAME, DOCUMENT_ID);
     }
 
 }

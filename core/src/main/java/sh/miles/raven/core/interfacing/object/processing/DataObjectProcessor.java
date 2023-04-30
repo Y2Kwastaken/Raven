@@ -1,7 +1,6 @@
 package sh.miles.raven.core.interfacing.object.processing;
 
 import java.lang.reflect.Field;
-import java.util.logging.Logger;
 
 import com.google.common.base.Preconditions;
 
@@ -54,7 +53,6 @@ public final class DataObjectProcessor {
         Preconditions.checkNotNull(dataField, "The given data field cannot be null.");
         Preconditions.checkNotNull(parentSection, "The given parent section cannot be null.");
 
-        Logger.getGlobal().info("Filling data field: " + dataField.getKey());
         final Object value = parentSection.get(dataField.getKey());
 
         if (value.getClass().isPrimitive()) {
@@ -62,7 +60,6 @@ public final class DataObjectProcessor {
         } else if (typeConversionManager.isRegistered(value.getClass())) {
             dataField.setValue(typeConversionManager.convert(value, dataField.getValue().getClass()));
         } else if (ProcessUtils.classHasInterface(dataField.getValue().getClass(), DataObject.class)) {
-            Logger.getGlobal().info("Filling data object field: " + dataField.getKey());
             dataField.setValue(
                     createDataInstance(dataField.getValue().getClass(), parentSection.getSection(dataField.getKey())));
         } else {

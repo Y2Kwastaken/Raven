@@ -40,6 +40,6 @@ public class TestDataAnnotationProcessor {
         }
 
         final var database = connection.getDatabase(DATABASE_NAME);
-        return (MongoDatabaseSection) database.getSection(COLLECTION_NAME);
+        return (MongoDatabaseSection) database.getSection(COLLECTION_NAME, "test-document");
     }
 }
