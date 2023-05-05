@@ -131,10 +131,34 @@ public class MongoDatabaseSectionTest {
     }
 
     @Test
+    public void testSetNestedValue() {
+        try {
+            final List<String> list = List.of("test0", "test1");
+            section.set("test-obj.test-nested", list);
+        }catch(DatabaseInsertionException e){
+            e.printStackTrace();
+        }
+
+        final var stringList = section.getStringList("test-obj.test-nested");
+        for (int i = 0; i < stringList.size(); i++) {
+            assertEquals("test" + i, stringList.get(i), "String list should contain \"test" + i + "\"");
+        }
+    }
+
+    @Test
     public void testRemoveValue() {
         section.remove("test-set-value");
         final var stringList = section.getStringList("test-set-value");
         assertNull(stringList, "String list should be null");
+    }
+
+    @Test
+    public void testRemoveNestedValue(){
+        section.remove("test-obj.test-nested");
+        final var stringList = section.getStringList("test-obj.test-nested");
+        assertNull(stringList, "String list should be null");
+
+        section.remove("test-obj");
     }
 
     private static final MongoDatabaseSection connect() {

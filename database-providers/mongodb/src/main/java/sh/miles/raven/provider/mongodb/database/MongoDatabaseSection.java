@@ -19,7 +19,7 @@ import sh.miles.raven.api.utils.DotPathUtils;
 public class MongoDatabaseSection implements DatabaseSection {
 
     private final MongoCollection<Document> collection;
-    private final String id;
+    private final String documentId;
     private final String root;
 
     /**
@@ -27,15 +27,15 @@ public class MongoDatabaseSection implements DatabaseSection {
      * 
      * @param database the database to use
      */
-    public MongoDatabaseSection(final MongoCollection<Document> collection, String id) {
+    public MongoDatabaseSection(final MongoCollection<Document> collection, String documentId) {
         this.collection = collection;
-        this.id = id;
+        this.documentId = documentId;
         this.root = "";
     }
 
-    public MongoDatabaseSection(final MongoCollection<Document> collection, final String id, final String root) {
+    public MongoDatabaseSection(final MongoCollection<Document> collection, final String documentId, final String root) {
         this.collection = collection;
-        this.id = id;
+        this.documentId = documentId;
         this.root = root + ".";
     }
 
@@ -92,7 +92,7 @@ public class MongoDatabaseSection implements DatabaseSection {
     public Object get(String key) {
         Preconditions.checkNotNull(key, "key cannot be null");
 
-        final Document document = collection.find(new Document("_id", id)).first();
+        final Document document = collection.find(new Document("_id", documentId)).first();
 
         if (DotPathUtils.isDotPath(key)) {
             return getNestedValue(document, key);
@@ -116,7 +116,7 @@ public class MongoDatabaseSection implements DatabaseSection {
     public DatabaseSection getSection(String name) {
         Preconditions.checkNotNull(name, "name cannot be null");
 
-        return new MongoDatabaseSection(collection, id, root + name);
+        return new MongoDatabaseSection(collection, documentId, root + name);
     }
 
     @Override
@@ -180,7 +180,7 @@ public class MongoDatabaseSection implements DatabaseSection {
         Preconditions.checkNotNull(key, "key cannot be null");
         Preconditions.checkNotNull(value, "value cannot be null");
 
-        collection.updateOne(new Document("_id", id), new Document("$set", new Document(key, value)));
+        collection.updateOne(new Document("_id", documentId), new Document("$set", new Document(key, value)));
     }
 
     @Override
@@ -188,7 +188,7 @@ public class MongoDatabaseSection implements DatabaseSection {
         Preconditions.checkNotNull(key, "key cannot be null");
 
         // delete value from database associated with key and root
-        collection.updateOne(new Document("_id", id), new Document("$unset", new Document(key, "")));
+        collection.updateOne(new Document("_id", documentId), new Document("$unset", new Document(key, "")));
     }
 
     private static Document getNestedDocument(final Document document, final String dotPath) {

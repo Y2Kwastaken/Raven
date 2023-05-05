@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'sh.miles.raven'
-version '2023.4.24-SNAPSHOT'
+version '2023.4.30-SNAPSHOT'
 description 'Database API by Miles'
 
 compileJava.options.encoding = 'UTF-8'
@@ -37,6 +37,7 @@ dependencies {
     api project(':api')
     implementation project(':database-providers')
     implementation project(':database-providers:mongodb')
+    implementation project(':database-providers:nitrite')
 }
 
 shadowJar {
