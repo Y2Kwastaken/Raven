@@ -45,7 +45,7 @@ public class MongoDatabaseTest {
     }
 
     @Test
-    public void deleteCollection() throws DatabaseConnectionException {
+    public void testDeleteCollection() throws DatabaseConnectionException {
         final var connection = new MongoDatabaseConnection();
         connection.connect(CONNECTION_STRING);
 

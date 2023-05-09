@@ -204,6 +204,5 @@ public class MongoDatabaseSection implements DatabaseSection {
                 DotPathUtils.removeHangingDot(
                         dotPath)),
                 Object.class);
-
     }
 }
