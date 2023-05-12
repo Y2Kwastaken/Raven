@@ -19,7 +19,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
     
     implementation 'org.jetbrains:annotations:24.0.0'
-    implementation(platform("org.dizitart:nitrite-bom:4.0.0-SNAPSHOT"))
+    implementation platform("org.dizitart:nitrite-bom:4.1.0-SNAPSHOT")
     
     implementation 'org.dizitart:nitrite'
     implementation 'org.dizitart:nitrite-mvstore-adapter'

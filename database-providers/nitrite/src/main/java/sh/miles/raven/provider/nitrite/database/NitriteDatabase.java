@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.collection.Document;
 import org.dizitart.no2.collection.NitriteCollection;
-import org.dizitart.no2.index.IndexEntry;
+import org.dizitart.no2.index.IndexDescriptor;
 import org.dizitart.no2.index.IndexOptions;
 import org.dizitart.no2.index.IndexType;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +38,7 @@ public class NitriteDatabase implements Database {
         final NitriteCollection nitriteCollection = database.getCollection(collection);
         Preconditions.checkNotNull(nitriteCollection, "collection cannot be null");
 
-        return new NitriteDatabaseSection(nitriteCollection, id);
+        return new NitriteDatabaseSection(database, nitriteCollection, id);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class NitriteDatabase implements Database {
         Preconditions.checkNotNull(nitriteCollection, "collection cannot be null");
 
         if (!isIndex(ID_INDEX, nitriteCollection.listIndices())) {
-            nitriteCollection.createIndex(ID_INDEX, IndexOptions.indexOptions(IndexType.Unique, false));
+            nitriteCollection.createIndex(IndexOptions.indexOptions(IndexType.UNIQUE), ID_INDEX);
         }
 
         NitriteUtils.andCommit(() -> {
@@ -58,7 +58,7 @@ public class NitriteDatabase implements Database {
             nitriteCollection.update(element, true);
         }, database);
 
-        return new NitriteDatabaseSection(nitriteCollection, id);
+        return new NitriteDatabaseSection(database, nitriteCollection, id);
     }
 
     @Override
@@ -83,7 +83,8 @@ public class NitriteDatabase implements Database {
         final NitriteCollection nitriteCollection = database.getCollection(collection);
         Preconditions.checkNotNull(nitriteCollection, "collection cannot be null");
 
-        return nitriteCollection.remove(where("_id").eq(id)).getAffectedCount() > 0;
+        return NitriteUtils.andCommit(() -> nitriteCollection.remove(where(ID_INDEX).eq(id)).getAffectedCount() > 0,
+                database);
     }
 
     @Override
@@ -110,7 +111,7 @@ public class NitriteDatabase implements Database {
         return true; // could throw exception
     }
 
-    private boolean isIndex(final String field, final Collection<IndexEntry> entries) {
-        return entries.stream().anyMatch(entry -> entry.getField().equals(field));
+    private static boolean isIndex(final String field, final Collection<IndexDescriptor> entries) {
+        return entries.stream().anyMatch(entry -> entry.getIndexFields().getFieldNames().contains(field));
     }
 }

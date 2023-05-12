@@ -6,7 +6,7 @@ package sh.miles.raven.api.database.exception;
  */
 public class DatabaseInsertionException extends Exception {
 
-    DatabaseInsertionException(String message) {
+    public DatabaseInsertionException(String message) {
         super(message);
     }
 

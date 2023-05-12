@@ -1,6 +1,7 @@
 package sh.miles.raven.provider.nitrite.database;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -48,6 +49,15 @@ public class NitrateDatabaseTest {
         assertTrue(database.hasSection(SectionField.COLLECTION_NAME, SectionField.DOCUMENT_NAME), "Should return true");
     }
 
+    @Test
+    public void testDeleteSection() {
+        final var database = getDatabase();
+
+        assertTrue(database.deleteSection(SectionField.COLLECTION_NAME, SectionField.DOCUMENT_NAME),
+                "Should have affected a document");
+        assertFalse(database.hasSection(SectionField.COLLECTION_NAME, SectionField.DOCUMENT_NAME), "Should return false");
+    }
+
     private static NitriteDatabase getDatabase() {
         final var connection = getConnection();
         return (NitriteDatabase) connection.getDatabase(DATABASE_NAME);
@@ -62,5 +72,5 @@ public class NitrateDatabaseTest {
         }
         return connection;
     }
-    
+
 }
