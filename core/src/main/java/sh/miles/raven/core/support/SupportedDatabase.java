@@ -3,10 +3,12 @@ package sh.miles.raven.core.support;
 import java.lang.reflect.InvocationTargetException;
 
 import sh.miles.raven.api.database.DatabaseConnection;
+import sh.miles.raven.api.support.DatabaseType;
 
 public enum SupportedDatabase {
 
-    MONGODB("sh.miles.raven.provider.mongodb.database.MongoDatabaseConnection");
+    MONGODB("sh.miles.raven.provider.mongodb.database.MongoDatabaseConnection"),
+    NITRITE("sh.miles.raven.provider.nitrite.database.NitriteDatabaseConnection");
 
     private final String connectionClassPath;
 
@@ -27,6 +29,15 @@ public enum SupportedDatabase {
                 | InvocationTargetException | ClassCastException e) {
             throw new IllegalStateException(e);
         }
+    }
+
+    public static SupportedDatabase fromDatabaseType(final DatabaseType databaseType) {
+        for (final SupportedDatabase supportedDatabase : SupportedDatabase.values()) {
+            if (supportedDatabase.name().equalsIgnoreCase(databaseType.name())) {
+                return supportedDatabase;
+            }
+        }
+        throw new IllegalArgumentException("Database type " + databaseType.name() + " is not supported");
     }
 
 }

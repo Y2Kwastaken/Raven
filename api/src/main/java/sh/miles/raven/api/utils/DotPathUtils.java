@@ -4,7 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * DotPathUtils is a utility class for working with dot paths
+ * DotPathUtils is a utility class for working with dot paths.
+ * 
+ * @implNote This class is intended for internal use, but can safely be used by
+ *           external projects. There is no intent in ever removing this class
+ *           nor deprecating it.
  */
 public final class DotPathUtils {
 

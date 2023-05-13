@@ -17,6 +17,7 @@ import com.google.common.base.Preconditions;
 
 import sh.miles.raven.api.database.Database;
 import sh.miles.raven.api.database.DatabaseSection;
+import sh.miles.raven.api.database.ObjectDatabaseSection;
 import sh.miles.raven.provider.nitrite.database.utils.NitriteUtils;
 
 public class NitriteDatabase implements Database {
@@ -39,6 +40,11 @@ public class NitriteDatabase implements Database {
         Preconditions.checkNotNull(nitriteCollection, "collection cannot be null");
 
         return new NitriteDatabaseSection(database, nitriteCollection, id);
+    }
+
+    @Override
+    public @NotNull ObjectDatabaseSection getObjectSection(@NotNull String collection, @NotNull String id) {
+        return new NitriteObjectDatabaseSection(getSection(collection, id));
     }
 
     @Override

@@ -9,6 +9,8 @@ repositories {
     maven {
         url "https://oss.sonatype.org/content/repositories/snapshots"
     }
+    mavenLocal()
+    mavenCentral()
 }
 
 dependencies {
@@ -25,10 +27,13 @@ dependencies {
     implementation 'org.dizitart:nitrite-mvstore-adapter'
 
     implementation project(':api')
+    implementation project(':core')
 }
 
 shadowJar {
     archiveClassifier.set("")
+    dependsOn(':api:shadowJar')
+    dependsOn(':core:shadowJar')
 }
 
 test {
