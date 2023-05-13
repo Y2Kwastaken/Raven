@@ -2,6 +2,7 @@ package sh.miles.raven.api.database;
 
 import org.jetbrains.annotations.NotNull;
 
+import sh.miles.raven.api.database.exception.DatabaseInsertionException;
 import sh.miles.raven.api.interfacing.object.DataObject;
 
 /**
@@ -53,4 +54,11 @@ public interface ObjectDatabaseSection {
     @Deprecated
     <T> T getAnnotatedObject(@NotNull final Class<T> clazz);
 
+    /**
+     * Sets a DataObject in the database. This will overwrite any existing data at
+     * the path.
+     * 
+     * @param object The DataObject to set.
+     */
+    void setDataObject(@NotNull final DataObject object) throws DatabaseInsertionException;
 }

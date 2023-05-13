@@ -92,8 +92,14 @@ public final class DataObjectProcessor {
         return dataField;
     }
 
+    /**
+     * Returns all {@link DataField} fields of a given {@link Object}.
+     * 
+     * @param instance The {@link Object} to get the {@link DataField} fields from.
+     * @return All {@link DataField} fields of a given {@link Object}.
+     */
     @SuppressWarnings("unchecked")
-    private static DataField<Object>[] getDataFieldsFromFields(final Object instance) {
+    public static DataField<Object>[] getDataFieldsFromFields(final Object instance) {
         Preconditions.checkNotNull(instance, "The given instance cannot be null.");
         final Field[] dataFieldFields = ProcessUtils.getFieldsOfType(instance.getClass(), DataField.class);
 
