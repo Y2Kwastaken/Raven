@@ -13,16 +13,20 @@ repositories {
 dependencies {
     testImplementation 'org.junit.platform:junit-platform-launcher:1.9.2'
     testImplementation 'org.junit.platform:junit-platform-suite-engine:1.9.1'
-    testImplementation 'com.github.seeseemelk:MockBukkit-v1.18:2.7.0'
 
     implementation 'org.jetbrains:annotations:24.0.0'
     implementation 'com.google.code.gson:gson:2.10.1'
+    
     implementation project(':api')
+    implementation project(':database-providers:mongodb')
+    implementation project(':database-providers:nitrite')
 }
 
 shadowJar {
     archiveClassifier.set("")
     dependsOn(':api:shadowJar')
+    dependsOn(':database-providers:mongodb:shadowJar')
+    dependsOn(':database-providers:nitrite:shadowJar')
 }
 
 test {

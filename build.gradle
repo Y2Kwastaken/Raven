@@ -11,7 +11,6 @@ description 'Database API by Miles'
 
 compileJava.options.encoding = 'UTF-8'
 compileTestJava.options.encoding = "UTF-8"
-java.sourceCompatibility = JavaVersion.VERSION_17
 jar.enabled = false 
 
 allprojects {
@@ -24,11 +23,16 @@ allprojects {
         tasks.withType(JavaCompile) {
             options.encoding = 'UTF-8'
         }
-        java.sourceCompatibility = JavaVersion.VERSION_17
 
         dependencies {
             implementation 'com.google.guava:guava:31.1-jre'
         }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 

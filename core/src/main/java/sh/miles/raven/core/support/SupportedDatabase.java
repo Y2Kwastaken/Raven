@@ -1,43 +1,36 @@
 package sh.miles.raven.core.support;
 
-import java.lang.reflect.InvocationTargetException;
-
 import sh.miles.raven.api.database.DatabaseConnection;
+import sh.miles.raven.api.interfacing.ProcessUtils;
 import sh.miles.raven.api.support.DatabaseType;
+import sh.miles.raven.provider.mongodb.database.MongoDatabaseConnection;
+import sh.miles.raven.provider.nitrite.database.NitriteDatabaseConnection;
 
+/**
+ * Bridges the gap between the API and the implementation.
+ * ordinal order is always preserved assume this is the case always
+ */
 public enum SupportedDatabase {
 
-    MONGODB("sh.miles.raven.provider.mongodb.database.MongoDatabaseConnection"),
-    NITRITE("sh.miles.raven.provider.nitrite.database.NitriteDatabaseConnection");
+    MONGODB(MongoDatabaseConnection.class),
+    NITRITE(NitriteDatabaseConnection.class);
 
-    private final String connectionClassPath;
+    private final Class<? extends DatabaseConnection> connectionClass;
 
-    SupportedDatabase(final String connectionClassPath) {
-        this.connectionClassPath = connectionClassPath;
+    SupportedDatabase(final Class<? extends DatabaseConnection> connectionClass) {
+        this.connectionClass = connectionClass;
     }
 
-    public String getConnectionClassPath() {
-        return connectionClassPath;
-    }
-
-    @SuppressWarnings("java:S2658")
     public DatabaseConnection getConnection() {
-        try {
-            final Class<?> clazz = Class.forName(connectionClassPath);
-            return (DatabaseConnection) clazz.getDeclaredConstructor(new Class[0]).newInstance(new Object[0]);
-        } catch (final ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException
-                | InvocationTargetException | ClassCastException e) {
-            throw new IllegalStateException(e);
-        }
+        return ProcessUtils.createInstance(connectionClass);
     }
 
-    public static SupportedDatabase fromDatabaseType(final DatabaseType databaseType) {
-        for (final SupportedDatabase supportedDatabase : SupportedDatabase.values()) {
-            if (supportedDatabase.name().equalsIgnoreCase(databaseType.name())) {
-                return supportedDatabase;
-            }
-        }
-        throw new IllegalArgumentException("Database type " + databaseType.name() + " is not supported");
+    public static SupportedDatabase fromDatabaseType(final DatabaseType type) {
+        return fromOrdinal(type.ordinal());
+    }
+
+    public static SupportedDatabase fromOrdinal(final int ordinal) {
+        return SupportedDatabase.values()[ordinal];
     }
 
 }

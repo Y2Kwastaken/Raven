@@ -4,9 +4,9 @@ import org.jetbrains.annotations.NotNull;
 
 import sh.miles.raven.api.database.DatabaseSection;
 import sh.miles.raven.api.database.ObjectDatabaseSection;
+import sh.miles.raven.api.interfacing.annotation.process.DataAnnotationProcessor;
 import sh.miles.raven.api.interfacing.object.DataObject;
-import sh.miles.raven.core.interfacing.annotation.processing.DataAnnotationProcessor;
-import sh.miles.raven.core.interfacing.object.processing.DataObjectProcessor;
+import sh.miles.raven.api.interfacing.object.process.DataObjectProcessor;
 
 public class MongoObjectDatabaseSection implements ObjectDatabaseSection {
 

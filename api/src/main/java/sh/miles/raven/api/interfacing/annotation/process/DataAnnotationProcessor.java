@@ -1,4 +1,4 @@
-package sh.miles.raven.core.interfacing.annotation.processing;
+package sh.miles.raven.api.interfacing.annotation.process;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
@@ -8,13 +8,17 @@ import org.jetbrains.annotations.NotNull;
 
 import com.google.common.base.Preconditions;
 
+import sh.miles.raven.api.conversion.TypeConversionManager;
 import sh.miles.raven.api.database.DatabaseSection;
+import sh.miles.raven.api.interfacing.ProcessUtils;
 import sh.miles.raven.api.interfacing.annotation.DataSection;
 import sh.miles.raven.api.interfacing.annotation.Key;
 import sh.miles.raven.api.interfacing.annotation.NestedObject;
-import sh.miles.raven.core.conversion.TypeConversionManager;
-import sh.miles.raven.core.interfacing.processing.ProcessUtils;
 
+/**
+ * Class for processing {@link DataSection} annotations and annotation related
+ * objects.
+ */
 public final class DataAnnotationProcessor {
 
     private static final TypeConversionManager typeConversionManager = TypeConversionManager.getInstance();
@@ -31,6 +35,9 @@ public final class DataAnnotationProcessor {
      * 
      * @param clazz         The {@link Class} to create an instance of.
      * @param parentSection The {@link DatabaseSection} to get the data from.
+     * 
+     * @return A new instance of the given {@link Class} with the data from the
+     *         given {@link DatabaseSection}.
      */
     public static <T> T createDataInstance(@NotNull final Class<T> clazz,
             @NotNull final DatabaseSection parentSection) {
@@ -116,6 +123,12 @@ public final class DataAnnotationProcessor {
         return clazz.isAnnotationPresent(DataSection.class);
     }
 
+    /**
+     * Returns the {@link DataSection} annotation of the given {@link Class}.
+     * 
+     * @param clazz The {@link Class} to process.
+     * @return The {@link DataSection} annotation of the given {@link Class}.
+     */
     public static DataSection processDataSection(@NotNull final Class<?> clazz) {
         Preconditions.checkNotNull(clazz, "The given class cannot be null.");
 

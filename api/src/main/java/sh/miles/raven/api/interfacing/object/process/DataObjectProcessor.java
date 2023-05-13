@@ -1,23 +1,38 @@
-package sh.miles.raven.core.interfacing.object.processing;
+package sh.miles.raven.api.interfacing.object.process;
 
 import java.lang.reflect.Field;
 
 import com.google.common.base.Preconditions;
 
+import sh.miles.raven.api.conversion.TypeConversionManager;
 import sh.miles.raven.api.database.DatabaseSection;
+import sh.miles.raven.api.interfacing.ProcessUtils;
 import sh.miles.raven.api.interfacing.object.DataField;
 import sh.miles.raven.api.interfacing.object.DataObject;
-import sh.miles.raven.core.conversion.TypeConversionManager;
-import sh.miles.raven.core.interfacing.processing.ProcessUtils;
 
+/**
+ * Class for processing {@link DataObject} objects.
+ * 
+ */
 public final class DataObjectProcessor {
 
     private static final TypeConversionManager typeConversionManager = TypeConversionManager.getInstance();
 
+    /**
+     * Creates a new instance of a given {@link Class} and adds it the given data
+     */
     private DataObjectProcessor() {
         throw new UnsupportedOperationException("This class cannot be instantiated.");
     }
 
+    /**
+     * Creates a new instance of a given {@link Class} and adds it the given data
+     * 
+     * @param <T>           The {@link Class} to create an instance of.
+     * @param clazz         The {@link Class} to create an instance of.
+     * @param parentSection The {@link DatabaseSection} to get the data from.
+     * @return A new instance of the given {@link Class} with the data from the
+     */
     public static <T> T createDataInstance(final Class<T> clazz, final DatabaseSection parentSection) {
         Preconditions.checkNotNull(clazz, "The given class cannot be null.");
         Preconditions.checkNotNull(parentSection, "The given parent section cannot be null.");
@@ -25,6 +40,14 @@ public final class DataObjectProcessor {
         return fillFieldsValues(ProcessUtils.createInstance(clazz), parentSection);
     }
 
+    /**
+     * Creates a new instance of a given {@link DataObject} and adds it the given
+     * 
+     * @param <T>           The {@link Class} to create an instance of.
+     * @param instance      The {@link Class} to create an instance of.
+     * @param parentSection The {@link DatabaseSection} to get the data from.
+     * @return A new instance of the given {@link Class} with the data from the
+     */
     public static <T extends DataObject> T createDataInstance(final T instance, final DatabaseSection parentSection) {
         Preconditions.checkNotNull(instance, "The given instance cannot be null.");
         Preconditions.checkNotNull(parentSection, "The given parent section cannot be null.");

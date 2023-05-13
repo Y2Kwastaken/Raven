@@ -1,9 +1,7 @@
-package sh.miles.raven.core.conversion;
+package sh.miles.raven.api.conversion;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import sh.miles.raven.api.conversion.TypeConverter;
 
 /**
  * Manages the type conversion process for the Raven API
@@ -37,6 +35,15 @@ public final class TypeConversionManager {
         }
     }
 
+    /**
+     * Converts an object to another type
+     * 
+     * @param <O>       the original type
+     * @param <C>       the converted type
+     * @param original  the original object
+     * @param converted the converted type
+     * @return the converted object
+     */
     public <O, C> C convert(O original, Class<C> converted) {
         final TypeConverter<O, C> converter = getConverter((Class<O>) original.getClass(), converted);
         if (converter == null) {
@@ -45,6 +52,15 @@ public final class TypeConversionManager {
         return converter.convert(original);
     }
 
+    /**
+     * Reverts a converted object to its original type
+     * 
+     * @param <O>       the original type
+     * @param <C>       the converted type
+     * @param converted the converted object
+     * @param original  the original type
+     * @return the original object
+     */
     public <O, C> O revert(C converted, Class<O> original) {
         final TypeConverter<O, C> converter = getConverter(original, (Class<C>) converted.getClass());
         if (converter == null) {
@@ -53,6 +69,15 @@ public final class TypeConversionManager {
         return converter.revert(converted);
     }
 
+    /**
+     * Gets a {@link TypeConverter} from the manager
+     * 
+     * @param <O>       the original type
+     * @param <C>       the converted type
+     * @param original  the original type
+     * @param converted the converted type
+     * @return the {@link TypeConverter} or null if none is found
+     */
     public <O, C> TypeConverter<O, C> getConverter(Class<O> original, Class<C> converted) {
         final TypeConverter<?, ?> converter = converters.get(original);
         if (converter == null) {

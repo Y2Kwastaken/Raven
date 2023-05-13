@@ -28,5 +28,30 @@ public interface RavenAPI {
      * @param converter The {@link TypeConverter} to register. Cannot be null.
      */
     void registerTypeConverter(@NotNull TypeConverter<?, ?> converter);
+
+    static RavenAPI getProvider() {
+        return Provider.getProvider();
+    }
+
+    static void setProvider(final RavenAPI provider) {
+        Provider.setProvider(provider);
+    }
+
+    /**
+     * The Provider class is used to provide the Raven API with an implementation
+     */
+    final class Provider {
+        private static RavenAPI provider;
+
+        private Provider() {
+        }
+
+        public static RavenAPI getProvider() {
+            return provider;
+        }
+
+        public static void setProvider(final RavenAPI provider) {
+            Provider.provider = provider;
+        }
+    }
 }
-    

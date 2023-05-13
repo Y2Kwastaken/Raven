@@ -27,7 +27,6 @@ dependencies {
     implementation 'org.dizitart:nitrite-mvstore-adapter'
 
     implementation project(':api')
-    implementation project(':core')
 }
 
 shadowJar {

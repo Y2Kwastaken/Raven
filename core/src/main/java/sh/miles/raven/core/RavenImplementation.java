@@ -5,13 +5,13 @@ import org.jetbrains.annotations.NotNull;
 import com.google.common.base.Preconditions;
 
 import sh.miles.raven.api.RavenAPI;
+import sh.miles.raven.api.conversion.TypeConversionManager;
 import sh.miles.raven.api.conversion.TypeConverter;
 import sh.miles.raven.api.database.DatabaseConnection;
 import sh.miles.raven.api.support.DatabaseType;
-import sh.miles.raven.core.conversion.TypeConversionManager;
 import sh.miles.raven.core.support.SupportedDatabase;
 
-public class CoreRavenAPI implements RavenAPI {
+public class RavenImplementation implements RavenAPI {
 
     @Override
     public DatabaseConnection getDatabaseConnection(@NotNull DatabaseType type) {
