@@ -173,14 +173,14 @@ public class NitriteDatabaseSection implements DatabaseSection {
     }
 
     @Override
+    @SuppressWarnings("java:S2259") // compiler bug no it won't
     public void remove(@NotNull String key) {
         final Document document = collection.find(where(ID_INDEX).eq(id)).firstOrNull().clone();
         if (document == null) {
             throw new IllegalArgumentException("document must not be null");
         }
 
-        removeDocumentValue(document, root, key);
-        removeEmptyDocument(document, root, key);
+        removeDocumentValue(null, document, root, key);
 
         collection.remove(where(ID_INDEX).eq(id));
         NitriteUtils.andCommit(
@@ -188,9 +188,12 @@ public class NitriteDatabaseSection implements DatabaseSection {
 
     }
 
-    private static final void removeDocumentValue(Document document, String root, String dotPath) {
+    private static final void removeDocumentValue(Document parent, Document document, String root, String dotPath) {
         if (!(DotPathUtils.isDotPath(dotPath))) {
             document.remove(dotPath);
+            if (document.size() == 0) {
+                parent.remove(root);
+            }
             return;
         }
 
@@ -200,31 +203,9 @@ public class NitriteDatabaseSection implements DatabaseSection {
         if (newDocument == null) {
             return;
         }
+        parent = document;
         document = document.get(root, Document.class);
-        removeDocumentValue(document, root, dotPath);
-    }
-
-    private static final void removeEmptyDocument(Document document, String root, String dotPath) {
-        // removes all empty documents from the root document provided
-        if (!(DotPathUtils.isDotPath(dotPath))) {
-            if (document.getFields().isEmpty()) {
-                document.remove(root);
-            }
-            return;
-        }
-
-        root = DotPathUtils.getRoot(dotPath);
-        dotPath = DotPathUtils.removeRoot(dotPath);
-        final Document newDocument = document.get(root, Document.class);
-        if(newDocument == null) {
-            return;
-        }
-
-        if(newDocument.getFields().isEmpty()) {
-            document.remove(root);
-        }
-
-        removeEmptyDocument(document, root, dotPath);
+        removeDocumentValue(parent, document, root, dotPath);
     }
 
     private static final Object getDocumentValue(String root, String dotPath, Document document) {
