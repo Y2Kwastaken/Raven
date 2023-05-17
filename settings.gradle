@@ -1,4 +1,4 @@
 rootProject.name = 'raven'
-include ':core', ':api', ':database-providers'
+include ':core', ':api', ':database-providers', 'data-mapper'
 include ':database-providers:mongodb'
 include ':database-providers:nitrite'

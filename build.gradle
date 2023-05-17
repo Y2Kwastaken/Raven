@@ -39,6 +39,7 @@ java {
 dependencies {
     api project(':api')
     implementation project(':core') 
+    implementation project(':data-mapper')
     implementation project(':database-providers')
     implementation project(':database-providers:mongodb')
     implementation project(':database-providers:nitrite')
@@ -48,6 +49,7 @@ shadowJar {
     archiveClassifier.set('')
     mustRunAfter(':api:shadowJar')
     mustRunAfter(':core:shadowJar')
+    mustRunAfter(':data-mapper:shadowJar')
     mustRunAfter(':database-providers:shadowJar')
     mustRunAfter(':database-providers:mongodb:shadowJar')
     mustRunAfter(':database-providers:nitrite:shadowJar')

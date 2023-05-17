@@ -3,7 +3,6 @@ package sh.miles.raven.provider.nitrite.database;
 import static org.dizitart.no2.filters.FluentFilter.where;
 
 import java.util.Collection;
-import java.util.logging.Logger;
 
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.collection.Document;
@@ -17,14 +16,12 @@ import com.google.common.base.Preconditions;
 
 import sh.miles.raven.api.database.Database;
 import sh.miles.raven.api.database.DatabaseSection;
-import sh.miles.raven.api.database.ObjectDatabaseSection;
 import sh.miles.raven.provider.nitrite.database.utils.NitriteUtils;
 
 public class NitriteDatabase implements Database {
 
     public static final String ID_INDEX = "doc_id";
 
-    private static final Logger LOGGER = Logger.getLogger("NitriteDatabase");
     private final Nitrite database;
 
     public NitriteDatabase(@NotNull Nitrite database) {
@@ -40,11 +37,6 @@ public class NitriteDatabase implements Database {
         Preconditions.checkNotNull(nitriteCollection, "collection cannot be null");
 
         return new NitriteDatabaseSection(database, nitriteCollection, id);
-    }
-
-    @Override
-    public @NotNull ObjectDatabaseSection getObjectSection(@NotNull String collection, @NotNull String id) {
-        return new NitriteObjectDatabaseSection(getSection(collection, id));
     }
 
     @Override
@@ -74,9 +66,6 @@ public class NitriteDatabase implements Database {
 
         final NitriteCollection nitriteCollection = database.getCollection(collection);
         Preconditions.checkNotNull(nitriteCollection, "collection cannot be null");
-
-        LOGGER.info("Collection: " + nitriteCollection.getName() + " has the following documents: ");
-        nitriteCollection.find().forEach(document -> LOGGER.info(document.toString()));
 
         return nitriteCollection.find(where(ID_INDEX).eq(id)).size() > 0;
     }

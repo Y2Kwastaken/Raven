@@ -18,16 +18,6 @@ public interface Database {
     DatabaseSection getSection(@NotNull String collection, @NotNull String id);
 
     /**
-     * Returns a ObjectDatabaseSection for the given section
-     * 
-     * @param collection the name of the collection
-     * @param id         the id of the target section
-     * @return the ObjectDatabaseSection
-     */
-    @NotNull
-    ObjectDatabaseSection getObjectSection(@NotNull String collection, @NotNull String id);
-
-    /**
      * Creates a new DatabaseSection for the given section
      * 
      * @param collection the name of the collection

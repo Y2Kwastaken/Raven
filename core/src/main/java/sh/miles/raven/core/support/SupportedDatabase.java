@@ -1,8 +1,8 @@
 package sh.miles.raven.core.support;
 
 import sh.miles.raven.api.database.DatabaseConnection;
-import sh.miles.raven.api.interfacing.ProcessUtils;
 import sh.miles.raven.api.support.DatabaseType;
+import sh.miles.raven.api.utils.ReflectionUtils;
 import sh.miles.raven.provider.mongodb.database.MongoDatabaseConnection;
 import sh.miles.raven.provider.nitrite.database.NitriteDatabaseConnection;
 
@@ -22,7 +22,7 @@ public enum SupportedDatabase {
     }
 
     public DatabaseConnection getConnection() {
-        return ProcessUtils.createInstance(connectionClass);
+        return ReflectionUtils.createInstance(connectionClass);
     }
 
     public static SupportedDatabase fromDatabaseType(final DatabaseType type) {

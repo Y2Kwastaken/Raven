@@ -9,7 +9,6 @@ import com.mongodb.client.MongoCollection;
 
 import sh.miles.raven.api.database.Database;
 import sh.miles.raven.api.database.DatabaseSection;
-import sh.miles.raven.api.database.ObjectDatabaseSection;
 
 public class MongoDatabase implements Database {
 
@@ -28,11 +27,6 @@ public class MongoDatabase implements Database {
         Preconditions.checkNotNull(mongoCollection, "collection cannot be null");
 
         return new MongoDatabaseSection(mongoCollection, id);
-    }
-
-    @Override
-    public @NotNull ObjectDatabaseSection getObjectSection(@NotNull String collection, @NotNull String id) {
-        return new MongoObjectDatabaseSection(getSection(collection, id));
     }
 
     @Override

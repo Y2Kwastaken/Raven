@@ -88,7 +88,7 @@ public class NitriteDatabaseSection implements DatabaseSection {
         }
 
         if (DotPathUtils.isDotPath(key)) {
-            return getDocumentValue(root, key, document);
+            return getDocumentValue(null, key, document);
         }
 
         return document.get(key);
@@ -164,7 +164,7 @@ public class NitriteDatabaseSection implements DatabaseSection {
             throw new DatabaseInsertionException("Document is null");
         }
 
-        setDocumentValue(document, root, key, value);
+        setDocumentValue(document, null, root + key, value);
 
         collection.remove(where(ID_INDEX).eq(id));
         NitriteUtils.andCommit(
@@ -238,4 +238,9 @@ public class NitriteDatabaseSection implements DatabaseSection {
         setDocumentValue(document, root, dotPath, value);
     }
 
+    @Override
+    public String toString() {
+        return "NitriteDatabaseSection [database=" + database + ", collection=" + collection + ", id=" + id + ", root="
+                + root + "]";
+    }
 }
