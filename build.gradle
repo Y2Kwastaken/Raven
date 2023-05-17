@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'sh.miles.raven'
-version '2023.5.13'
+version '2023.5.17'
 description 'Database API by Miles'
 
 compileJava.options.encoding = 'UTF-8'
