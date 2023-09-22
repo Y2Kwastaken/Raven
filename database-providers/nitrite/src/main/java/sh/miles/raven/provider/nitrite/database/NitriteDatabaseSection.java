@@ -91,7 +91,11 @@ public class NitriteDatabaseSection implements DatabaseSection {
             return getDocumentValue(null, key, document);
         }
 
-        return document.get(key);
+        final Object got = document.get(key);
+        if (got instanceof Document) {
+            return getSection(key);
+        }
+        return got;
     }
 
     private <T> T getWrapperValue(@NotNull String key, @NotNull Class<T> clazz) {
@@ -173,14 +177,13 @@ public class NitriteDatabaseSection implements DatabaseSection {
     }
 
     @Override
-    @SuppressWarnings("java:S2259") // compiler bug no it won't
     public void remove(@NotNull String key) {
         final Document document = collection.find(where(ID_INDEX).eq(id)).firstOrNull().clone();
         if (document == null) {
             throw new IllegalArgumentException("document must not be null");
         }
 
-        removeDocumentValue(null, document, root, key);
+        removeDocumentValue(null, document, root, root + key);
 
         collection.remove(where(ID_INDEX).eq(id));
         NitriteUtils.andCommit(
@@ -188,7 +191,7 @@ public class NitriteDatabaseSection implements DatabaseSection {
 
     }
 
-    private static final void removeDocumentValue(Document parent, Document document, String root, String dotPath) {
+    private static void removeDocumentValue(Document parent, Document document, String root, String dotPath) {
         if (!(DotPathUtils.isDotPath(dotPath))) {
             document.remove(dotPath);
             if (document.size() == 0) {
@@ -208,9 +211,13 @@ public class NitriteDatabaseSection implements DatabaseSection {
         removeDocumentValue(parent, document, root, dotPath);
     }
 
-    private static final Object getDocumentValue(String root, String dotPath, Document document) {
+    private Object getDocumentValue(String root, String dotPath, Document document) {
         if (!(DotPathUtils.isDotPath(dotPath))) {
-            return document.get(dotPath);
+            final Object got = document.get(dotPath);
+            if (got instanceof Document) {
+                return getSection(dotPath);
+            }
+            return got;
         }
 
         root = DotPathUtils.getRoot(dotPath);
@@ -219,10 +226,11 @@ public class NitriteDatabaseSection implements DatabaseSection {
         if (!(value instanceof Document)) {
             return value;
         }
+
         return getDocumentValue(root, dotPath, (Document) value);
     }
 
-    private static final void setDocumentValue(Document document, String root, String dotPath, Object value) {
+    private static void setDocumentValue(Document document, String root, String dotPath, Object value) {
         if (!(DotPathUtils.isDotPath(dotPath))) {
             document.put(dotPath, value);
             return;

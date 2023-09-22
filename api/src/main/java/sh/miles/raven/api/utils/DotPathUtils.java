@@ -5,10 +5,9 @@ import java.util.List;
 
 /**
  * DotPathUtils is a utility class for working with dot paths.
- * 
- * @implNote This class is intended for internal use, but can safely be used by
- *           external projects. There is no intent in ever removing this class
- *           nor deprecating it.
+ * <p>
+ * This class is intended for internal use, but can safely be used by external projects. There is no intent in ever
+ * removing this class nor deprecating it.
  */
 public final class DotPathUtils {
 
@@ -18,7 +17,7 @@ public final class DotPathUtils {
 
     /**
      * Add a child to a dot path
-     * 
+     *
      * @param path  the dot path
      * @param child the child to add
      * @return the new dot path
@@ -29,7 +28,7 @@ public final class DotPathUtils {
 
     /**
      * getRoot returns the first part of a dot path (e.g. "root" in "root.child")
-     * 
+     *
      * @param path the dot path
      * @return the root of the dot path
      */
@@ -39,7 +38,7 @@ public final class DotPathUtils {
 
     /**
      * splitDotPath splits a dot path into an array of strings
-     * 
+     *
      * @param path the dot path
      * @return the array of strings
      */
@@ -49,7 +48,7 @@ public final class DotPathUtils {
 
     /**
      * splitDotPathToList splits a dot path into a list of strings
-     * 
+     *
      * @param path the dot path
      * @return the list of strings
      */
@@ -59,21 +58,18 @@ public final class DotPathUtils {
 
     /**
      * isDotPath checks if a string is a dot path
-     * 
-     * @implNote This method won't work on normal sentences and should only be used
-     *           for dot paths (e.g. "root.child") however it will also detect (Have
-     *           a nice day. Bye!) as a dot path
+     *
      * @param path the string to check
-     * @return true if the string is a dot path, false otherwise
+     * @return true if the string is a dot path, false otherwise This method won't work on normal sentences and should
+     * only be used for dot paths (e.g. "root.child") however it will also detect (Have a nice day. Bye!) as a dot path
      */
     public static boolean isDotPath(final String path) {
         return path.contains(".");
     }
 
     /**
-     * removeHangingDot removes a hanging dot from a dot path (e.g. "root.child." to
-     * "root.child")
-     * 
+     * removeHangingDot removes a hanging dot from a dot path (e.g. "root.child." to "root.child")
+     *
      * @param path the dot path
      * @return the dot path without the hanging dot
      */
@@ -86,7 +82,7 @@ public final class DotPathUtils {
 
     /**
      * removeRoot removes the root from a dot path (e.g. "root.child" to "child")
-     * 
+     *
      * @param path the dot path
      * @return the dot path without the root
      */
@@ -95,9 +91,8 @@ public final class DotPathUtils {
     }
 
     /**
-     * toDotPath converts a list of strings to a dot path (e.g. ["root", "child"] to
-     * "root.child")
-     * 
+     * toDotPath converts a list of strings to a dot path (e.g. ["root", "child"] to "root.child")
+     *
      * @param path the list of strings
      * @return the dot path
      */
