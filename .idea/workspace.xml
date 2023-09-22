@@ -4,54 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dfeada11-3703-4e44-a7b7-2e9bdd145425" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/api/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/dependency-reduced-pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-mapper/dependency-reduced-pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-mapper/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/v2/DataContainer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/v2/data/DataTuple.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/v2/database/DataContainerCollection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/v2/interpreter/DataContainerInterpreter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data-mapper/src/test/java/sh/miles/raven/datamapper/v2/DataContainerMock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database-providers/mongodb/dependency-reduced-pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database-providers/mongodb/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database-providers/nitrite/dependency-reduced-pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database-providers/nitrite/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database-providers/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/src/main/java/sh/miles/raven/api/utils/DotPathUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/api/src/main/java/sh/miles/raven/api/utils/DotPathUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/api/DataBlock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/api/DataContainer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/api/database/DataBlockDatabase.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/api/fields/DataField.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/v2/data/DataField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/api/fields/DataTuple.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/parse/DataBlockParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/parse/DataContainerParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/parse/DataFieldParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/main/java/sh/miles/raven/datamapper/parse/DataParseUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/test/java/sh/miles/raven/datamapper/DataBlockMock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/test/java/sh/miles/raven/datamapper/DataContainerMock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/test/java/sh/miles/raven/datamapper/api/database/DataBlockDatabaseTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/test/java/sh/miles/raven/datamapper/api/database/mock/DataContainerMock0.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/test/java/sh/miles/raven/datamapper/api/database/mock/DataContainerMock1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/test/java/sh/miles/raven/datamapper/parse/DataBlockParserTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data-mapper/src/test/java/sh/miles/raven/datamapper/parse/DataContainerParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/data-mapper/src/test/java/sh/miles/raven/datamapper/v2/interpreter/DataContainerInterpreterTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database-providers/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database-providers/mongodb/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database-providers/nitrite/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database-providers/nitrite/src/main/java/sh/miles/raven/provider/nitrite/database/NitriteDatabaseSection.java" beforeDir="false" afterPath="$PROJECT_DIR$/database-providers/nitrite/src/main/java/sh/miles/raven/provider/nitrite/database/NitriteDatabaseSection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
-    </list>
+    <list default="true" id="dfeada11-3703-4e44-a7b7-2e9bdd145425" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -129,6 +82,7 @@
     <option name="myCommands">
       <command value="mvn intsall -DskipTests" />
       <command value="mvn install -DskipTests" />
+      <command value="mvn versions:set -DnewVersion=2023.9.22" />
     </option>
   </component>
   <component name="RunManager" selected="Application.NitriteVisualizer">
@@ -232,7 +186,7 @@
       <workItem from="1695331170214" duration="20000" />
       <workItem from="1695331196749" duration="343000" />
       <workItem from="1695331543921" duration="2239000" />
-      <workItem from="1695411930705" duration="5246000" />
+      <workItem from="1695411930705" duration="5854000" />
     </task>
     <servers />
   </component>
