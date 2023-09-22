@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>sh.miles</groupId>
+        <groupId>sh.miles.raven</groupId>
         <artifactId>raven-database-providers</artifactId>
         <version>2023.9.22</version>
     </parent>
@@ -14,7 +14,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>sh.miles</groupId>
+            <groupId>sh.miles.raven</groupId>
             <artifactId>raven-api</artifactId>
             <version>2023.9.22</version>
         </dependency>

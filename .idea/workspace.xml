@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dfeada11-3703-4e44-a7b7-2e9bdd145425" name="Changes" comment="" />
+    <list default="true" id="dfeada11-3703-4e44-a7b7-2e9bdd145425" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,6 +85,7 @@
       <command value="mvn intsall -DskipTests" />
       <command value="mvn install -DskipTests" />
       <command value="mvn versions:set -DnewVersion=2023.9.22" />
+      <command value="mvn deploy -DskipTests" />
     </option>
   </component>
   <component name="RunManager" selected="Application.NitriteVisualizer">
@@ -186,7 +189,7 @@
       <workItem from="1695331170214" duration="20000" />
       <workItem from="1695331196749" duration="343000" />
       <workItem from="1695331543921" duration="2239000" />
-      <workItem from="1695411930705" duration="5854000" />
+      <workItem from="1695411930705" duration="6177000" />
     </task>
     <servers />
   </component>
