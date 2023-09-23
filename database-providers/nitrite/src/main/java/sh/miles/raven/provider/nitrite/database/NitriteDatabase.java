@@ -3,6 +3,7 @@ package sh.miles.raven.provider.nitrite.database;
 import static org.dizitart.no2.filters.FluentFilter.where;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.collection.Document;
@@ -59,6 +60,16 @@ public class NitriteDatabase implements Database {
         return new NitriteDatabaseSection(database, nitriteCollection, id);
     }
 
+    @NotNull
+    public List<String> getAllSections(@NotNull String collection) {
+        Preconditions.checkNotNull(collection, "collection cannot be null");
+
+        return database.getCollection(collection)
+                .find().toList()
+                .stream().map((Document document) -> document.get(ID_INDEX).toString()).toList();
+    }
+
+
     @Override
     public boolean hasSection(@NotNull String collection, @NotNull String id) {
         Preconditions.checkNotNull(collection, "section cannot be null");
@@ -67,7 +78,7 @@ public class NitriteDatabase implements Database {
         final NitriteCollection nitriteCollection = database.getCollection(collection);
         Preconditions.checkNotNull(nitriteCollection, "collection cannot be null");
 
-        return nitriteCollection.find(where(ID_INDEX).eq(id)).size() > 0;
+        return !nitriteCollection.find(where(ID_INDEX).eq(id)).isEmpty();
     }
 
     @Override

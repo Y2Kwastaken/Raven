@@ -8,10 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="raven-data-mapper" />
         <module name="raven-platform-mongodb" />
-        <module name="raven-core" />
+        <module name="raven" />
         <module name="raven-api" />
         <module name="raven-platform-nitrite" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="raven-core" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

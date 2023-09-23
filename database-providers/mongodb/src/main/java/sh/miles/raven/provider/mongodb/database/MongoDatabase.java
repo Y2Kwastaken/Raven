@@ -1,6 +1,9 @@
 package sh.miles.raven.provider.mongodb.database;
 
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoIterable;
 import org.bson.Document;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
 
 import com.google.common.base.Preconditions;
@@ -10,6 +13,11 @@ import com.mongodb.client.MongoCollection;
 import sh.miles.raven.api.database.Database;
 import sh.miles.raven.api.database.DatabaseSection;
 
+import javax.print.Doc;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class MongoDatabase implements Database {
 
     private com.mongodb.client.MongoDatabase database;
@@ -18,6 +26,7 @@ public class MongoDatabase implements Database {
         this.database = database;
     }
 
+    @NotNull
     @Override
     public DatabaseSection getSection(@NotNull String collection, @NotNull String id) {
         Preconditions.checkNotNull(collection, "section cannot be null");
@@ -27,6 +36,23 @@ public class MongoDatabase implements Database {
         Preconditions.checkNotNull(mongoCollection, "collection cannot be null");
 
         return new MongoDatabaseSection(mongoCollection, id);
+    }
+
+    @NotNull
+    @Override
+    public List<String> getAllSections(@NotNull String collection) {
+        Preconditions.checkNotNull(collection, "collection can not be null");
+
+        final MongoCollection<Document> mongoCollection = database.getCollection(collection);
+        final List<String> sections = new ArrayList<>();
+        try (final MongoCursor<Document> sectionIterator = mongoCollection.find().iterator()) {
+            Document section;
+            while (sectionIterator.hasNext()) {
+                section = sectionIterator.next();
+                sections.add(section.getString("_id"));
+            }
+        }
+        return sections;
     }
 
     @Override
@@ -51,7 +77,7 @@ public class MongoDatabase implements Database {
     }
 
     @Override
-    public @NotNull boolean hasSection(@NotNull String collection, @NotNull String id) {
+    public boolean hasSection(@NotNull String collection, @NotNull String id) {
         Preconditions.checkNotNull(collection, "section cannot be null");
         Preconditions.checkNotNull(id, "id cannot be null");
 

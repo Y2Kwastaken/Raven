@@ -2,6 +2,8 @@ package sh.miles.raven.api.database;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 /**
  * Database is the main interface
  */
@@ -9,7 +11,7 @@ public interface Database {
 
     /**
      * Returns a DatabaseSection for the given section
-     * 
+     *
      * @param collection the name of the collection
      * @param id         the id of the target section
      * @return the DatabaseSection
@@ -18,8 +20,17 @@ public interface Database {
     DatabaseSection getSection(@NotNull String collection, @NotNull String id);
 
     /**
+     * Returns all sections within the provided collection
+     *
+     * @param collection the name of the collection
+     * @return a list of all ids of the target section
+     */
+    @NotNull
+    List<String> getAllSections(@NotNull final String collection);
+
+    /**
      * Creates a new DatabaseSection for the given section
-     * 
+     *
      * @param collection the name of the collection
      * @param id         the id of the target section
      * @return the DatabaseSection
@@ -29,7 +40,7 @@ public interface Database {
 
     /**
      * Checks if the given section exists
-     * 
+     *
      * @param collection the name of the collection
      * @param id         the id of the target section
      * @return true if the section exists, false otherwise
@@ -38,7 +49,7 @@ public interface Database {
 
     /**
      * Deletes the given section
-     * 
+     *
      * @param collection the name of the collection
      * @param id         the id of the target section
      * @return true if the section was deleted, false otherwise
@@ -47,7 +58,7 @@ public interface Database {
 
     /**
      * Creates a new collection
-     * 
+     *
      * @param collection the name of the collection
      * @return true if the collection was created, false otherwise
      */
@@ -55,7 +66,7 @@ public interface Database {
 
     /**
      * If the database has the given collection
-     * 
+     *
      * @param collection the name of the collection
      * @return true if the database has the collection, false otherwise
      */
@@ -63,7 +74,7 @@ public interface Database {
 
     /**
      * Deletes the given collection
-     * 
+     *
      * @param collection the name of the collection
      * @return true if the collection was deleted, false otherwise
      */
