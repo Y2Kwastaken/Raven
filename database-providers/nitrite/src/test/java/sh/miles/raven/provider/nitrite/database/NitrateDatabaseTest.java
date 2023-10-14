@@ -1,12 +1,10 @@
 package sh.miles.raven.provider.nitrite.database;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
 import sh.miles.raven.api.database.exception.DatabaseConnectionException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class NitrateDatabaseTest {
 
@@ -25,6 +23,12 @@ public class NitrateDatabaseTest {
         final var database = getDatabase();
 
         assertTrue(database.hasCollection(SectionField.COLLECTION_NAME), "Should return true");
+    }
+
+    @Test
+    public void testGetAllSections() {
+        final var database = getDatabase();
+        assertEquals("test-document", database.getAllSections(SectionField.COLLECTION_NAME).get(0));
     }
 
     @Test

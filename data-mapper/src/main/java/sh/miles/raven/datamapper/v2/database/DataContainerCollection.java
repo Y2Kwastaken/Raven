@@ -16,6 +16,9 @@ public class DataContainerCollection {
     public DataContainerCollection(@NotNull final Database database, @NotNull final String collection) {
         this.database = database;
         this.collection = collection;
+        if (!database.hasCollection(collection)) {
+            database.createCollection(collection);
+        }
     }
 
     /**
@@ -25,6 +28,9 @@ public class DataContainerCollection {
      * @param container the container
      */
     public void setContainer(@NotNull final String id, @NotNull final DataContainer container) {
+        if (!database.hasSection(collection, id)) {
+            database.createSection(collection, id);
+        }
         DataContainerInterpreter.setContainerToSection(database.getSection(this.collection, id), container);
     }
 
@@ -48,6 +54,7 @@ public class DataContainerCollection {
      */
     public void removeDataContainer(@NotNull final String id, DataContainer container) {
         DataContainerInterpreter.removeContainerFromSection(database.getSection(this.collection, id), container);
+        database.deleteSection(this.collection, id);
     }
 
 }

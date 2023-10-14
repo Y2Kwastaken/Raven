@@ -107,7 +107,7 @@ public class NitriteDatabaseSection implements DatabaseSection {
             try {
                 return (T) clazz.getField("MIN_VALUE").get(null);
             } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-                e.printStackTrace();
+                throw new RuntimeException("Unable to map to wrapper");
             }
         }
 
@@ -162,32 +162,36 @@ public class NitriteDatabaseSection implements DatabaseSection {
     @Override
     public void set(@NotNull String key, @Nullable Object value) throws DatabaseInsertionException {
 
-        final Document document = collection.find(where(ID_INDEX).eq(id)).firstOrNull().clone();
+        Document document = collection.find(where(ID_INDEX).eq(id)).firstOrNull();
 
         if (document == null) {
             throw new DatabaseInsertionException("Document is null");
         }
+        document = document.clone();
 
         setDocumentValue(document, null, root + key, value);
 
         collection.remove(where(ID_INDEX).eq(id));
+        final Document finalDocument = document;
         NitriteUtils.andCommit(
-                () -> collection.update(where(ID_INDEX).eq(id), document, UpdateOptions.updateOptions(true)),
+                () -> collection.update(where(ID_INDEX).eq(id), finalDocument, UpdateOptions.updateOptions(true)),
                 database);
     }
 
     @Override
     public void remove(@NotNull String key) {
-        final Document document = collection.find(where(ID_INDEX).eq(id)).firstOrNull().clone();
+        Document document = collection.find(where(ID_INDEX).eq(id)).firstOrNull();
         if (document == null) {
             throw new IllegalArgumentException("document must not be null");
         }
+        document = document.clone();
 
         removeDocumentValue(null, document, root, root + key);
 
         collection.remove(where(ID_INDEX).eq(id));
+        final Document finalDocument = document;
         NitriteUtils.andCommit(
-                () -> collection.update(where(ID_INDEX).eq(id), document, UpdateOptions.updateOptions(true)), database);
+                () -> collection.update(where(ID_INDEX).eq(id), finalDocument, UpdateOptions.updateOptions(true)), database);
 
     }
 
